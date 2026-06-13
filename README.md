@@ -1,105 +1,126 @@
 # Medical-chatbot-E2E-
 
-# How to run?
+## How to Run?
 
-# STEPS:
+### STEPS:
 
-# Clone the repository
-'''bash
-git clone https://github.com/ganesh123381/Medical-chatbot-E2E-.git
-'''
+### Clone the Repository
 
-## STEP 01- Create a conda environment after opening the repository
-'''bash
+```bash
+git clone https://github.com/your-username/Medical-chatbot-E2E-.git
+```
+
+### STEP 01 - Create a Conda Environment
+
+```bash
 conda create -n medibot python=3.10 -y
+```
+
+```bash
 conda activate medibot
-'''
+```
 
-## STEP 02- install the requirements
-'''bash
+### STEP 02 - Install Requirements
+
+```bash
 pip install -r requirements.txt
-'''
+```
 
-## Create a .env file in the root directory and add your Pinecone & openai credentials as follows:
-'''bash
-PINECONE_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-GROQ_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-'''
+### Create a `.env` File
 
-# run the following command to store embeddings to pinecone
-'''bash
+Create a `.env` file in the root directory and add your Pinecone & Groq credentials:
+
+```bash
+PINECONE_API_KEY="xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+GROQ_API_KEY="xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
+
+### Store Embeddings in Pinecone
+
+```bash
 python store_index.py
-'''
+```
 
-# Finally run the following command
-'''bash
+### Run the Application
+
+```bash
 python app.py
-'''
+```
 
-Now,
-'''bash
-open up localhost:
-'''
+Open your browser and visit:
 
-### Techstack Used:
+```bash
+http://localhost:5000
+```
 
--Python
--LangChain
--Flask
--llama
--Pinecone
+---
 
-# AWS-CICD-Deployment-with-Github-Actions
+## Tech Stack Used
 
-##  1.Login to AWS console.
+- Python
+- LangChain
+- Flask
+- Llama
+- Pinecone
 
-## 2.Create IAM user for deployment
-'''bash
-  
-   #with specific access
+---
 
-1. EC2 access : It is virtual machine
+# AWS CI/CD Deployment with GitHub Actions
 
-2. ECR: Elastic Container registry to save your docker image in aws
+## 1. Login to AWS Console
 
+---
 
-#Description: About the deployment
+## 2. Create IAM User for Deployment
 
-1. Build docker image of the source code
+### Required Access
 
-2. Push your docker image to ECR
+1. EC2 Access (Virtual Machine)
+2. ECR Access (Elastic Container Registry)
 
-3. Launch Your EC2 
+### Deployment Workflow
 
-4. Pull Your image from ECR in EC2
+1. Build Docker image from source code
+2. Push Docker image to Amazon ECR
+3. Launch EC2 Instance
+4. Pull Docker image from ECR in EC2
+5. Launch Docker container in EC2
 
-5. Lauch your docker image in EC2
+### IAM Policies
 
-#Policy:
+```text
+AmazonEC2ContainerRegistryFullAccess
+AmazonEC2FullAccess
+```
 
-1. AmazonEC2ContainerRegistryFullAccess
+---
 
-2. AmazonEC2FullAccess
-'''
+## 3. Create ECR Repository
 
-## 3. Create ECR repo to store/save docker image
+Save the ECR URI:
 
-''bash
-    - Save the URI: 315865595366.dkr.ecr.us-east-1.amazonaws.com/medicalbot
-    '''
-## 4. Create EC2 machine (Ubuntu)
+```bash
+315865595366.dkr.ecr.us-east-1.amazonaws.com/medicalbot
+```
 
-## 5. Open EC2 and Install docker in EC2 Machine:
+---
 
-'''bash
-    #optional
+## 4. Create EC2 Machine (Ubuntu)
 
+---
+
+## 5. Install Docker on EC2
+
+### Update Packages
+
+```bash
 sudo apt-get update -y
+sudo apt-get upgrade -y
+```
 
-sudo apt-get upgrade
+### Install Docker
 
-#required
-
+```bash
 curl -fsSL https://get.docker.com -o get-docker.sh
 
 sudo sh get-docker.sh
@@ -107,18 +128,27 @@ sudo sh get-docker.sh
 sudo usermod -aG docker ubuntu
 
 newgrp docker
-'''
+```
 
-## 6. Configure EC2 as self-hosted runner:
-'''bash
-setting>actions>runner>new self hosted runner> choose os> then run command one by one
-'''
+---
 
-## 7. Setup github secrets:
-  
-1) AWS_ACCESS_KEY_ID
-2) AWS_SECRET_ACCESS_KEY
-3) AWS_DEFAULT_REGION
-4) ECR_REPO
-5) PINECONE_API_KEY
-6) GROQ_API_KEY
+## 6. Configure EC2 as Self-Hosted Runner
+
+```text
+Settings → Actions → Runners → New Self Hosted Runner
+```
+
+Choose your OS and execute the commands provided by GitHub.
+
+---
+
+## 7. Setup GitHub Secrets
+
+```text
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+AWS_DEFAULT_REGION
+ECR_REPO
+PINECONE_API_KEY
+GROQ_API_KEY
+```
